@@ -4,14 +4,14 @@ const courseRouter = Router();
 
 
 
-courseRouter.post("/course/purchase",function(req,res)
+courseRouter.post("/purchase",function(req,res)
 {
     res.json({
         "status": "success",
     })
 })
 
-courseRouter.get("/course/preview",function(req,res)
+courseRouter.get("/preview",function(req,res)
 {
     res.json({
         "status": "success",
