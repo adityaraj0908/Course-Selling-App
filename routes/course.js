@@ -1,6 +1,7 @@
 const {Router} = require("express");
 const { model } = require("mongoose");
 const courseRouter = Router();
+const {courseModel} = require("../db")
 
 
 

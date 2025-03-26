@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 // console.log("Connecting to mongoDB...")
- mongoose.connect("mongodb+srv://admin:admin1234@cluster0.rotv2.mongodb.net/EduVista")
+
 // console.log("Connected to mongoDB")
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
