@@ -1,6 +1,10 @@
 const {Router} = require("express");
 const userRouter = Router();
 const {userModel} = require("../db")
+const jwt = require("jsonwebtoken")
+const JWT_USER_PASSWORD = "randomadityaraj"
+const bcrypt = require("bcryptjs");
+const SALT_ROUNDS = 5;
 
 
 userRouter.post("/signup",async function(req,res)
@@ -8,10 +12,11 @@ userRouter.post("/signup",async function(req,res)
     const {email,password,firstName,lastName} = req.body
 
     try{
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
         await userModel.create(
             {
                 email:email,
-                password:password,
+                password:hashedPassword,
                 firstName:firstName,
                 lastName:lastName
             }
@@ -32,11 +37,45 @@ userRouter.post("/signup",async function(req,res)
     )
 })
 
-userRouter.post("/signin",function(req,res)
+userRouter.post("/signin",async function(req,res)
 {
-    res.json({
-        "status": "success",
+    const {email,password} = req.body;
+    const user = await userModel.findOne({
+        email:email
     })
+    if(user)
+    {
+        const correct_password = await bcrypt.compare(password,user.password)
+        if(correct_password)
+        {
+            const token = jwt.sign(
+                {
+                    id:user._id
+                },JWT_USER_PASSWORD
+            );
+            res.json(
+                {
+                    token:token
+                }
+            )
+        }
+        else{
+            res.status(403).json(
+                {
+                    msg:"Incorrect Password"
+                }
+            )
+        }
+        
+    }
+    else{
+        res.status(403).json(
+            {
+                msg:"User not found"
+            }
+        )
+    }
+    
 })
 userRouter.get("/purchases",function(req,res)
 {
