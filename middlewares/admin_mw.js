@@ -1,6 +1,7 @@
 const admin = require("../routes/admin");
 const jwt = require("jsonwebtoken")
-const JWT_ADMIN_PASSWORD = "randomaditya1234"
+require('dotenv').config()
+const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD
 
 function adminMiddleware(req,res,next)
 {
@@ -21,6 +22,6 @@ function adminMiddleware(req,res,next)
         }
 }
 
-module.exports({
+module.exports = {
     adminMiddleware:adminMiddleware
-})
+}

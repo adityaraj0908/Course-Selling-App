@@ -1,11 +1,13 @@
 const {Router} = require("express");
 const adminRouter = Router();
+require('dotenv').config()
 const {adminModel, courseModel} = require("../db")
-const JWT_ADMIN_PASSWORD = "randomaditya1234"
+const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD
 const SALT_ROUNDS = 5
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const {adminMiddleware} = require("../middlewares/admin_mw")
+
 
 adminRouter.post("/signup",async function(req,res)
 {

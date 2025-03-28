@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
-const JWT_USER_PASSWORD = "randomadityaraj"
+require('dotenv').config()
+const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD
 
 
 function userMiddleware(req,res,next)
@@ -22,6 +23,6 @@ function userMiddleware(req,res,next)
 
 }
 
-module.exports({
+module.exports = {
     userMiddleware:userMiddleware
-})
+}

@@ -1,8 +1,9 @@
 const {Router} = require("express");
 const userRouter = Router();
+require('dotenv').config()
 const {userModel} = require("../db")
 const jwt = require("jsonwebtoken")
-const JWT_USER_PASSWORD = "randomadityaraj"
+const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD
 const bcrypt = require("bcryptjs");
 const SALT_ROUNDS = 5;
 
