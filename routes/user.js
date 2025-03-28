@@ -21,6 +21,11 @@ userRouter.post("/signup",async function(req,res)
                 lastName:lastName
             }
         )
+        res.json(
+            {
+                msg:"Signup successfull"
+            }
+        )
     }
     catch(err)
     {
@@ -30,11 +35,7 @@ userRouter.post("/signup",async function(req,res)
             }
         )
     }
-    res.json(
-        {
-            msg:"Signup successfull"
-        }
-    )
+    
 })
 
 userRouter.post("/signin",async function(req,res)
