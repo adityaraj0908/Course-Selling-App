@@ -1,11 +1,12 @@
 const {Router} = require("express");
 const userRouter = Router();
 require('dotenv').config()
-const {userModel} = require("../db")
+const {userModel, purchaseModel} = require("../db")
 const jwt = require("jsonwebtoken")
 const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD
 const bcrypt = require("bcryptjs");
 const SALT_ROUNDS = 5;
+const {userMiddleware} = require("../middlewares/user_mw")
 
 
 userRouter.post("/signup",async function(req,res)
@@ -79,10 +80,14 @@ userRouter.post("/signin",async function(req,res)
     }
     
 })
-userRouter.get("/purchases",function(req,res)
+userRouter.get("/purchases",userMiddleware,async function(req,res)
 {
+    const userId = req.userId
+    const purchases = await purchaseModel.find({
+        userId:userId
+    })
     res.json({
-        "status": "success",
+        purchases
     })
 })
 

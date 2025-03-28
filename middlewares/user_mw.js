@@ -9,7 +9,7 @@ function userMiddleware(req,res,next)
     const decoded = jwt.verify(token,JWT_USER_PASSWORD)
     if(decoded)
     {
-        req.adminId = decoded.id
+        req.userId = decoded.id
         next()
     }
     else

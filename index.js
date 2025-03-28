@@ -19,6 +19,6 @@ async function main()
 {
      await mongoose.connect(process.env.MONGO_URL)
      app.listen(3000)
-     console.log("Everything working properly")
+     console.log("Successfully connected to the database")
 }
 main()

@@ -116,7 +116,7 @@ adminRouter.put("/course",adminMiddleware,async function(req,res)
         imageURL:imageURL
     })
     res.json({
-        status:"Course Created",
+        status:"Course Updated",
         courseID:course._id
     })
 })
